@@ -49,27 +49,8 @@ public:
    }
 };
 
-class lfg_solo_config : public WorldScript
-{
-public:
-    lfg_solo_config() : WorldScript("lfg_solo_config") { }
-
-    void OnBeforeConfigLoad(bool reload) override
-    {
-        if (!reload) {
-            std::string conf_path = _CONF_DIR;
-            std::string cfg_file = conf_path + "/SoloLfg.conf";
-
-            std::string cfg_def_file = cfg_file + ".dist";
-            sConfigMgr->LoadMore(cfg_def_file.c_str());
-            sConfigMgr->LoadMore(cfg_file.c_str());
-        }
-    }
-};
-
 void AddLfgSoloScripts()
 {
 	new lfg_solo_announce();
     new lfg_solo();
-	new lfg_solo_config();
 }
