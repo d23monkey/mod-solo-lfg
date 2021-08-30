@@ -1,65 +1,65 @@
 diff --git a/src/server/game/DungeonFinding/LFGMgr.cpp b/src/server/game/DungeonFinding/LFGMgr.cpp
-index e92cf35b1..50b174e33 100644
+index 6d32c5760..1d17ab738 100644
 --- a/src/server/game/DungeonFinding/LFGMgr.cpp
 +++ b/src/server/game/DungeonFinding/LFGMgr.cpp
-@@ -27,7 +27,7 @@
+@@ -26,8 +26,7 @@
+ 
  namespace lfg
  {
- 
+-
 -    LFGMgr::LFGMgr(): m_lfgProposalId(1), m_options(sWorld->getIntConfig(CONFIG_LFG_OPTIONSMASK))
 +    LFGMgr::LFGMgr(): m_lfgProposalId(1), m_options(sWorld->getIntConfig(CONFIG_LFG_OPTIONSMASK)), m_isSoloLFG(false)
      {
          new LFGPlayerScript();
          new LFGGroupScript();
-@@ -1673,7 +1673,7 @@ namespace lfg
+@@ -1672,8 +1671,7 @@ namespace lfg
+         for (LfgProposalPlayerContainer::const_iterator itPlayers = proposal.players.begin(); itPlayers != proposal.players.end(); ++itPlayers)
              if (itPlayers->second.accept != LFG_ANSWER_AGREE)   // No answer (-1) or not accepted (0)
                  allAnswered = false;
- 
+-
 -        if (!allAnswered)
 +        if (!sLFGMgr->IsSoloLFG() && !allAnswered)
          {
              for (LfgProposalPlayerContainer::const_iterator it = proposal.players.begin(); it != proposal.players.end(); ++it)
                  SendLfgUpdateProposal(it->first, proposal);
-@@ -2697,4 +2697,9 @@ namespace lfg
+@@ -2656,5 +2654,9 @@ namespace lfg
+         }
          return randomDungeons;
      }
- 
 +    void LFGMgr::ToggleSoloLFG()
 +    {
 +        m_isSoloLFG = !m_isSoloLFG;
 +    }
-+
+ 
  } // namespace lfg
 diff --git a/src/server/game/DungeonFinding/LFGMgr.h b/src/server/game/DungeonFinding/LFGMgr.h
-index 0340cc57a..3aa5ce920 100644
+index 0340cc57a..b4ae800ed 100644
 --- a/src/server/game/DungeonFinding/LFGMgr.h
 +++ b/src/server/game/DungeonFinding/LFGMgr.h
-@@ -533,6 +533,11 @@ namespace lfg
+@@ -532,6 +532,10 @@ namespace lfg
+         void RBPacketAppendPlayer(const RBInternalInfo& info, ByteBuffer& buffer);
          void RBPacketBuildDifference(WorldPacket& differencePacket, uint32 dungeonId, uint32 deletedCounter, ByteBuffer& buffer_deleted, uint32 groupCounter, ByteBuffer& buffer_groups, uint32 playerCounter, ByteBuffer& buffer_players);
          void RBPacketBuildFull(WorldPacket& fullPacket, uint32 dungeonId, RBInternalInfoMap& infoMap);
- 
 +        /// Toggle LFG in debug mode
 +        void ToggleSoloLFG();
 +        /// Check if debug mode
 +        bool IsSoloLFG() const { return m_isSoloLFG; }
-+
+ 
          // LfgQueue
          /// Get last lfg state (NONE, DUNGEON or FINISHED_DUNGEON)
-         LfgState GetOldState(ObjectGuid guid);
-@@ -591,6 +596,8 @@ namespace lfg
+@@ -590,6 +594,7 @@ namespace lfg
+         uint32 lastProposalId;                             ///< pussywizard, store it here because of splitting LFGMgr update into tasks
          uint32 m_raidBrowserUpdateTimer[2];                ///< pussywizard
          uint32 m_raidBrowserLastUpdatedDungeonId[2];       ///< pussywizard: for 2 factions
- 
 +        bool m_isSoloLFG;                                  ///< solo lfg
-+
+ 
          LfgQueueContainer QueuesStore;                     ///< Queues
          LfgCachedDungeonContainer CachedDungeonMapStore;   ///< Stores all dungeons by groupType
-         // Reward System
 diff --git a/src/server/game/DungeonFinding/LFGQueue.cpp b/src/server/game/DungeonFinding/LFGQueue.cpp
-index 86ead49f6..e3c8d9605 100644
+index e43080c14..e532ddb57 100644
 --- a/src/server/game/DungeonFinding/LFGQueue.cpp
 +++ b/src/server/game/DungeonFinding/LFGQueue.cpp
-@@ -290,7 +290,7 @@ namespace lfg
+@@ -285,7 +285,7 @@ namespace lfg
              return LFG_INCOMPATIBLES_MULTIPLE_LFG_GROUPS;
  
          // Group with less that MAXGROUPSIZE members always compatible
@@ -68,7 +68,7 @@ index 86ead49f6..e3c8d9605 100644
          {
              LfgQueueDataContainer::iterator itQueue = QueueDataStore.find(check.front());
              LfgRolesMap roles = itQueue->second.roles;
-@@ -387,7 +387,7 @@ namespace lfg
+@@ -382,7 +382,7 @@ namespace lfg
          }
  
          // Enough players?
@@ -77,4 +77,3 @@ index 86ead49f6..e3c8d9605 100644
          {
              strGuids.addRoles(proposalRoles);
              for (uint8 i = 0; i < 5 && check.guids[i]; ++i)
--- 
