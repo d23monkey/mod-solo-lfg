@@ -7,8 +7,8 @@ index 6d32c5760..1d17ab738 100644
  namespace lfg
  {
 -
--    LFGMgr::LFGMgr(): m_lfgProposalId(1), m_options(sWorld->getIntConfig(CONFIG_LFG_OPTIONSMASK))
-+    LFGMgr::LFGMgr(): m_lfgProposalId(1), m_options(sWorld->getIntConfig(CONFIG_LFG_OPTIONSMASK)), m_isSoloLFG(false)
+-    LFGMgr::LFGMgr(): m_lfgProposalId(1), m_options(sWorld->getIntConfig(CONFIG_LFG_OPTIONSMASK)), m_Testing(false)
++    LFGMgr::LFGMgr(): m_lfgProposalId(1), m_options(sWorld->getIntConfig(CONFIG_LFG_OPTIONSMASK)), m_Testing(false), m_isSoloLFG(false)
      {
          new LFGPlayerScript();
          new LFGGroupScript();
@@ -63,7 +63,7 @@ index e43080c14..e532ddb57 100644
              return LFG_INCOMPATIBLES_MULTIPLE_LFG_GROUPS;
  
          // Group with less that MAXGROUPSIZE members always compatible
--        if (check.size() == 1 && numPlayers < MAXGROUPSIZE)
+-        if (!sLFGMgr->IsTesting() && check.size() == 1 && numPlayers < MAXGROUPSIZE)
 +        if (!sLFGMgr->IsSoloLFG() && numPlayers != MAXGROUPSIZE) // solo lfg
          {
              LfgQueueDataContainer::iterator itQueue = QueueDataStore.find(check.front());
@@ -72,7 +72,7 @@ index e43080c14..e532ddb57 100644
          }
  
          // Enough players?
--        if (numPlayers != MAXGROUPSIZE)
+-        if (!sLFGMgr->IsTesting() && numPlayers != MAXGROUPSIZE)
 +        if (!sLFGMgr->IsSoloLFG() && numPlayers != MAXGROUPSIZE) // solo lfg
          {
              strGuids.addRoles(proposalRoles);
