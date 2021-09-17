@@ -60,4 +60,4 @@ copy the file SoloLfg.conf.dist to SoloLfg.conf and edit it (keep both files).
 *  [Traesh: Original Script](https://github.com/Traesh)
 *  [Micrah/Milestorme: Module Creator](https://github.com/milestorme).
 *  [Conan513](https://github.com/conan513).
-*  [Artanisx](https://github.com/Artanisx) - Update for Docker installations.
+*  [Artanisx](https://github.com/Artanisx) - Update for Docker installations. Updated LFG-Solo.patch to work with the latest AzerothCore version (17/09/2021).
