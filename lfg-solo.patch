@@ -17,7 +17,7 @@ index 6d32c5760..1d17ab738 100644
              if (itPlayers->second.accept != LFG_ANSWER_AGREE)   // No answer (-1) or not accepted (0)
                  allAnswered = false;
 -
--        if (!allAnswered)
+-        if (!m_Testing && !allAnswered)
 +        if (!sLFGMgr->IsSoloLFG() && !allAnswered)
          {
              for (LfgProposalPlayerContainer::const_iterator it = proposal.players.begin(); it != proposal.players.end(); ++it)
