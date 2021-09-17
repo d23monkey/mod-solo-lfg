@@ -7,7 +7,7 @@ Allows for players to use dungeon finder solo or in groups less than and up to 5
 ## Standard Installation
 ```
 1. Go inside your /modules/ folder
-2. git clone https://github.com/Artanisx/mod-solo-lfg.git
+2. git clone https://github.com/azerothcore/mod-solo-lfg.git
 3. Apply lfg-solo.patch to your core.
     a. In order to do this, please go to the root /azerothcore-wotlk of your installation.
     b. Then do git apply modules/mod-solo-lfg/lfg-solo.patch 
@@ -19,7 +19,7 @@ Allows for players to use dungeon finder solo or in groups less than and up to 5
 ## Docker Installation
 ```
 1. Go inside your /modules/ folder
-2. git clone https://github.com/Artanisx/mod-solo-lfg.git
+2. git clone https://github.com/azerothcore/mod-solo-lfg.git
 3. Apply lfg-solo.patch to your core.
     a. In order to do this, please go to the root /azerothcore-wotlk of your installation.
     b. Then do 'git apply modules/mod-solo-lfg/lfg-solo.patch' 
