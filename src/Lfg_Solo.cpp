@@ -15,9 +15,7 @@
 
 class lfg_solo_announce : public PlayerScript
 {
-
 public:
-
     lfg_solo_announce() : PlayerScript("lfg_solo_announce") {}
 
     void OnLogin(Player* player)
@@ -30,23 +28,18 @@ public:
     }
 };
 
-class lfg_solo : public PlayerScript
+class lfg_solo : public WorldScript
 {
 public:
-    lfg_solo() : PlayerScript("lfg_solo") { }
-    
-   // Docker Installation prevents warnings. In order to avoid the issue, we need to add __attribute__ ((unused)) 
-   // to the player variable to tell the compiler it is fine not to use it.
-   void OnLogin(Player* player)
-   {
-	   if (sConfigMgr->GetIntDefault("SoloLFG.Enable", true))
+    lfg_solo() : WorldScript("lfg_solo") {}
+
+    void OnAfterConfigLoad(bool /*reload*/) override
+    {
+        if (sConfigMgr->GetBoolDefault("SoloLFG.Enable", true) != sLFGMgr->IsSoloLFG())
         {
-            if (!sLFGMgr->IsSoloLFG())
-            {
             sLFGMgr->ToggleSoloLFG();
-            }
         }
-   }
+    }
 };
 
 void AddLfgSoloScripts()
