@@ -12,18 +12,17 @@ index 38acfcda8..752d39add 100644
      {
          new LFGPlayerScript();
          new LFGGroupScript();
-@@ -1800,7 +1801,9 @@ namespace lfg
+@@ -1800,7 +1801,8 @@ namespace lfg
              if (itPlayers->second.accept != LFG_ANSWER_AGREE)   // No answer (-1) or not accepted (0)
                  allAnswered = false;
  
 -        if (!m_Testing && !allAnswered)
 +        //if (!m_Testing && !allAnswered)
 +	if (!sLFGMgr->IsSoloLFG() && !allAnswered)
-+
          {
              for (LfgProposalPlayerContainer::const_iterator it = proposal.players.begin(); it != proposal.players.end(); ++it)
                  SendLfgUpdateProposal(it->first, proposal);
-@@ -2783,4 +2786,9 @@ namespace lfg
+@@ -2783,4 +2786,8 @@ namespace lfg
          return randomDungeons;
      }
  
@@ -31,7 +30,6 @@ index 38acfcda8..752d39add 100644
 +   {
 +      m_isSoloLFG = !m_isSoloLFG;
 +   }
-+
  } // namespace lfg
 diff --git a/src/server/game/DungeonFinding/LFGMgr.h b/src/server/game/DungeonFinding/LFGMgr.h
 index 27e63f201..748b98243 100644
