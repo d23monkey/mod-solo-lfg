@@ -18,7 +18,7 @@ class lfg_solo_announce : public PlayerScript
 public:
     lfg_solo_announce() : PlayerScript("lfg_solo_announce") {}
 
-    void OnLogin(Player* player)
+    void OnLogin(Player* __attribute__ ((unused))player)
     {
         // Announce Module
         if (sConfigMgr->GetBoolDefault("SoloLFG.Announce", true))
