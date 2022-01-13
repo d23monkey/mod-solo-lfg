@@ -1,9 +1,9 @@
 diff --git a/src/Lfg_Solo.cpp b/src/Lfg_Solo.cpp
-index ee5f70e..ea035bf 100644
+index d00f70f..8eb663d 100644
 --- a/src/Lfg_Solo.cpp
 +++ b/src/Lfg_Solo.cpp
-@@ -20,7 +20,7 @@ public:
- 
+@@ -18,7 +18,7 @@ class lfg_solo_announce : public PlayerScript
+ public:
      lfg_solo_announce() : PlayerScript("lfg_solo_announce") {}
  
 -    void OnLogin(Player* player)
@@ -11,15 +11,3 @@ index ee5f70e..ea035bf 100644
      {
          // Announce Module
          if (sConfigMgr->GetBoolDefault("SoloLFG.Announce", true))
-@@ -37,7 +37,7 @@ public:
-     
-    // Docker Installation prevents warnings. In order to avoid the issue, we need to add __attribute__ ((unused)) 
-    // to the player variable to tell the compiler it is fine not to use it.
--   void OnLogin(Player* player)
-+   void OnLogin(Player* __attribute__ ((unused))player)
-    {
- 	   if (sConfigMgr->GetIntDefault("SoloLFG.Enable", true))
-         {
--- 
-1.8.3.1
-
