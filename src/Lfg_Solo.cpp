@@ -21,7 +21,7 @@ public:
     void OnLogin(Player* player)
     {
         // Announce Module
-        if (sConfigMgr->GetBoolDefault("SoloLFG.Announce", true))
+        if (sConfigMgr->GetOption<bool>("SoloLFG.Announce", true))
         {
             ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00Solo Dungeon Finder |rmodule.");
         }
@@ -35,7 +35,7 @@ public:
 
     void OnAfterConfigLoad(bool /*reload*/) override
     {
-        if (sConfigMgr->GetBoolDefault("SoloLFG.Enable", true) != sLFGMgr->IsTesting())
+        if (sConfigMgr->GetOption<bool>("SoloLFG.Enable", true) != sLFGMgr->IsTesting())
         {
             sLFGMgr->ToggleTesting();
         }
