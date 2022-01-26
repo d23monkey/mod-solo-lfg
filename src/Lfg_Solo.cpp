@@ -35,9 +35,9 @@ public:
 
     void OnAfterConfigLoad(bool /*reload*/) override
     {
-        if (sConfigMgr->GetBoolDefault("SoloLFG.Enable", true) != sLFGMgr->IsSoloLFG())
+        if (sConfigMgr->GetBoolDefault("SoloLFG.Enable", true) != sLFGMgr->IsTesting())
         {
-            sLFGMgr->ToggleSoloLFG();
+            sLFGMgr->ToggleTesting();
         }
     }
 };
