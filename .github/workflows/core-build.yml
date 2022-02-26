@@ -24,12 +24,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'recursive'
-          path: 'modules/mod-solo-lfg'
-      - name: Apply core patch
-        run: git apply modules/mod-solo-lfg/lfg-solo.patch
-      - name: Apply docker patch
-        working-directory: ./modules/mod-solo-lfg
-        run: git apply docker.patch        
+          path: 'modules/mod-solo-lfg'        
       - name: Cache
         uses: actions/cache@v2
         with:
