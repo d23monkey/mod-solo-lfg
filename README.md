@@ -1,4 +1,10 @@
+# ![logo](https://raw.githubusercontent.com/azerothcore/azerothcore.github.io/master/images/logo-github.png) AzerothCore
+
 # Solo Dungeon Finder
+
+- Latest build status with azerothcore:
+
+[![Build Status](https://github.com/azerothcore/mod-solo-lfg/workflows/core-build/badge.svg?branch=master&event=push)](https://github.com/azerothcore/mod-solo-lfg)
 
 ## Description
 
@@ -40,7 +46,6 @@ copy the file SoloLfg.conf.dist to SoloLfg.conf and edit it (keep both files).
     a. Go to your root folder and  ./bin/acore-docker-build
     b. Then do a docker-compose up
 ```
-
 
 ## Credits
 *  [Traesh: Original Script](https://github.com/Traesh)
