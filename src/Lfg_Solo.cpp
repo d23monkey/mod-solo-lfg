@@ -44,6 +44,6 @@ public:
 
 void AddLfgSoloScripts()
 {
-	new lfg_solo_announce();
+    new lfg_solo_announce();
     new lfg_solo();
 }
