@@ -1,6 +1,6 @@
 void AddLfgSoloScripts();
 
-void Addmod_sololfgScripts()
+void Addmod_solo_lfgScripts()
 {
     AddLfgSoloScripts();
 }
