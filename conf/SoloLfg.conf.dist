@@ -23,11 +23,9 @@ SoloLFG.Announce = 1
 #        Description: Set the XP rate in dungeons to FixedXPRate
 #        Default:     1  - (Enabled)
 #                     0  - (Disabled)
-#
 
 SoloLFG.FixedXP = 1
 
-#
 #    SoloLFG.FixedXPRate
 #        Description: Set the fixed XP rate used in dungeons
 #        Default:     0.2 (The same XP gained in a full party of 5)
