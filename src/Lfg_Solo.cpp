@@ -36,7 +36,7 @@ public:
             return;
         }
 
-        // Force the rate to 1.0 regardless of group size, to encourage group play
+        // Force the rate to FixedXPRate regardless of group size, to encourage group play
         rate = sConfigMgr->GetOption<float>("SoloLFG.FixedXPRate", 0.2);
     }
 };
