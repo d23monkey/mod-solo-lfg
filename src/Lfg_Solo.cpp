@@ -27,7 +27,7 @@ public:
         }
     }
 
-    void OnRewardKillRewarder(Player*, bool isDungeon, float& rate) override
+    void OnRewardKillRewarder(Player* /*player*/, bool isDungeon, float& rate) override
     {
         if (!isDungeon
             || !sConfigMgr->GetOption<bool>("SoloLFG.Enable", true)
